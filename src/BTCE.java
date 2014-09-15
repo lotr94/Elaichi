@@ -12,11 +12,12 @@
  *
  */
 
-import java.io.BufferedReader;
+import java.io.*;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
+import java.io.Writer;
 import java.lang.reflect.Type;
 import java.math.BigInteger;
 import java.net.MalformedURLException;
@@ -350,7 +351,8 @@ public class BTCE {
 		long elapsed = System.currentTimeMillis()-last_request ;
 		if( elapsed < request_limit ) {
 			try {
-				Thread.currentThread().sleep(request_limit-elapsed) ;
+				Thread.currentThread();
+				Thread.sleep(request_limit-elapsed) ;
 			} catch (InterruptedException e) {
 				
 			}
@@ -391,7 +393,8 @@ public class BTCE {
 		long elapsed = System.currentTimeMillis()-auth_last_request ;
 		if( elapsed < auth_request_limit ) {
 			try {
-				Thread.currentThread().sleep(auth_request_limit-elapsed) ;
+				Thread.currentThread();
+				Thread.sleep(auth_request_limit-elapsed) ;
 			} catch (InterruptedException e) {
 				
 			}
@@ -428,15 +431,18 @@ public class BTCE {
 			conn.setUseCaches(false) ;
 			conn.setDoOutput(true) ;
 			conn.setRequestProperty("Key",key) ;
+			System.out.println("Daaniboy");
 			conn.setRequestProperty("Sign",toHex(mac.doFinal(postData.getBytes("UTF-8")))) ;
+			System.out.println("Daaniboy");
 			conn.setRequestProperty("Content-Type","application/x-www-form-urlencoded") ;
 			conn.setRequestProperty("User-Agent",USER_AGENT) ;
-		
+			System.out.println("Daaniboy");
 			// write post data
+			
 			OutputStreamWriter out = new OutputStreamWriter(conn.getOutputStream());
 			out.write(postData) ;
 			out.close() ;
-	
+			System.out.println("Daaniboy");
 			// read response
 			BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			String line = null ;
@@ -642,7 +648,8 @@ public class BTCE {
 	 * 
 	 */
 	private class TransactionHistoryReturnDeserializer implements JsonDeserializer<TransactionHistoryReturn> {
-		  public TransactionHistoryReturn deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+		  @Override
+		public TransactionHistoryReturn deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
 			  TransactionHistoryReturn thr = new TransactionHistoryReturn() ;
 			  List<TransactionHistoryOrder> transactions = new ArrayList<TransactionHistoryOrder>() ;
 			  if( json.isJsonObject() ) {
@@ -736,7 +743,8 @@ public class BTCE {
 	}
 
 	private class TradeHistoryReturnDeserializer implements JsonDeserializer<TradeHistoryReturn> {
-		  public TradeHistoryReturn deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+		  @Override
+		public TradeHistoryReturn deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
 			  TradeHistoryReturn thr = new TradeHistoryReturn() ;
 			  List<TradeHistoryOrder> trades = new ArrayList<TradeHistoryOrder>() ;
 			  if( json.isJsonObject() ) {
@@ -829,7 +837,8 @@ public class BTCE {
 	}
 	
 	private class OrderListReturnDeserializer implements JsonDeserializer<OrderListReturn> {
-		  public OrderListReturn deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+		  @Override
+		public OrderListReturn deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
 			  OrderListReturn olr = new OrderListReturn() ;
 			  List<OrderListOrder> orders = new ArrayList<OrderListOrder>() ;
 			  if( json.isJsonObject() ) {

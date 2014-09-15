@@ -5,7 +5,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
-import java.math.BigInteger;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -349,7 +348,8 @@ public class Cryptsy {
 		long elapsed = System.currentTimeMillis() - last_request;
 		if (elapsed < request_limit) {
 			try {
-				Thread.currentThread().sleep(request_limit - elapsed);
+				Thread.currentThread();
+				Thread.sleep(request_limit - elapsed);
 			} catch (InterruptedException e) {
 
 			}
@@ -392,7 +392,8 @@ public class Cryptsy {
 		long elapsed = System.currentTimeMillis() - auth_last_request;
 		if (elapsed < auth_request_limit) {
 			try {
-				Thread.currentThread().sleep(auth_request_limit - elapsed);
+				Thread.currentThread();
+				Thread.sleep(auth_request_limit - elapsed);
 			} catch (InterruptedException e) {
 
 			}
@@ -692,6 +693,7 @@ public class Cryptsy {
 	 */
 	private class PublicMarketDataReturnDeserializer implements
 			JsonDeserializer<PublicMarketDataReturn> {
+		@Override
 		public PublicMarketDataReturn deserialize(JsonElement json, Type typeOfT,
 				JsonDeserializationContext context) throws JsonParseException {
 			PublicMarketDataReturn mdr = new PublicMarketDataReturn();
@@ -714,6 +716,7 @@ public class Cryptsy {
 	 * 
 	 */
 	private class BalancesDeserializer implements JsonDeserializer<Balances> {
+		@Override
 		public Balances deserialize(JsonElement json, Type typeOfT,
 				JsonDeserializationContext context) throws JsonParseException {
 			Balances balances = new Balances();
@@ -741,6 +744,7 @@ public class Cryptsy {
 		private SimpleDateFormat df = new SimpleDateFormat(
 				"yyyy-MM-dd HH:mm:ss");
 
+		@Override
 		public Date deserialize(JsonElement json, Type typeOfT,
 				JsonDeserializationContext context) throws JsonParseException {
 			Date dt = null;
@@ -759,6 +763,7 @@ public class Cryptsy {
 	 */
 	private class DepthDeserializer implements JsonDeserializer<DepthReturn> {
 		
+		@Override
 		public DepthReturn deserialize(JsonElement json, Type typeOfT,
 				JsonDeserializationContext context) throws JsonParseException {
 			DepthReturn depth = new DepthReturn() ;

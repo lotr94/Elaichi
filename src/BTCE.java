@@ -342,6 +342,7 @@ public class BTCE {
 	 * @return an array of TradeDetail objects
 	 * @throws BTCEException
 	 */
+	
 	public TradesDetail[] getTrades(String pair) throws BTCEException {
 		return gson.fromJson(request(TICKER_TRADES_URL+pair+"/trades"),TradesDetail[].class) ;
 	}

@@ -2,16 +2,17 @@
 public class Sherlock {
 	
 	private double thresholdQuantity;
+	
 	//private Market [] viableCurrencies;
 	
-	BTCE exchange = new BTCE();
+	static BTCE exchange = new BTCE();
 	
-	//set the threshold quantity based on the amount being transferred (I just picked 20000 for the fuck of it, we'll need to analyze it to find a more appropriate formula 
+	  //set the threshold quantity based on the amount being transferred (I just picked 20000 for the fuck of it, we'll need to analyze it to find a more appropriate formula 
 	/*void setThreshold(double amount){
 		thresholdQuantity = amount*20000;
 	}*/
 	
-	double getBuy(String pair) throws Exception {
+	static double getBuy(String pair) throws Exception {
 		return exchange.getTicker(pair).buy;
 	}
 	double getSell(String pair) throws Exception {
@@ -34,9 +35,13 @@ public class Sherlock {
 	}*/
 	
 	
+	
 	//picks currency most likely to rise in price
 	void currencySelector() throws Exception {
-		System.out.println("Buy = " + getBuy("btc_usd") + "\nSell = " + getSell("btc_usd") + "\nVolume = " + getVolume("btc_usd"));
+		//System.out.println("Buy(USD) = " + getBuy("btc_usd") + "\nSell(EUR) = " + getSell("btc_eur"));// + "\nVolume = " + getVolume("btc_eur"));
+	
+		
+		
 		
 	}
 }

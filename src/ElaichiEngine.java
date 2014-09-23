@@ -38,26 +38,25 @@ public class ElaichiEngine {
 		int count = -1;
 		shouldStop = false;
 		Thread timer = new Thread() {
-            public void run() {
-                try {
-                    sleep(length * 60 * 1000);
-                } catch (InterruptedException e) {
-                }
-                shouldStop = true;
-            }
-        };
-        timer.start();
+            	public void run() {
+	                try {
+	                    	sleep(length * 60 * 1000);
+	                } catch (InterruptedException e) {
+	                }
+                	shouldStop = true;
+            	}};
+        	timer.start();
         
-        while(!shouldStop) {
-        	try {
-        		count++;
-        		x[count] = a.getBuy(pair);
-				Thread.sleep(1000);
+	        while(!shouldStop) {
+	        	try {
+	        		count++;
+	        		x[count] = a.getBuy(pair);
+					Thread.sleep(1000);
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+					e.printStackTrace();
 			}
-        }
-        table = x;
+	        }
+        	table = x;
 	}
 	
 	public static void validateAllCertificates() throws KeyManagementException, NoSuchAlgorithmException {
